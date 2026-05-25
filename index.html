@@ -44,7 +44,6 @@ body {
   overflow-x: hidden;
 }
 
-/* ── SUBTLE TEXTURE ── */
 body::before {
   content: '';
   position: fixed;
@@ -56,7 +55,6 @@ body::before {
   z-index: 0;
 }
 
-/* ── NAV ── */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -86,7 +84,6 @@ nav {
 }
 .nav-links a:hover { color: var(--text); }
 
-/* ── HERO ── */
 .hero {
   position: relative;
   z-index: 1;
@@ -199,7 +196,6 @@ h1 em {
 }
 .btn-outline:hover { border-color: var(--text); transform: translateY(-2px); }
 
-/* ── HERO CARD ── */
 .hero-card {
   flex-shrink: 0;
   width: 280px;
@@ -247,7 +243,6 @@ h1 em {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── SHARED SECTION ── */
 section {
   position: relative;
   z-index: 1;
@@ -282,7 +277,6 @@ section {
   z-index: 1;
 }
 
-/* ── ABOUT ── */
 .about-grid {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
@@ -313,7 +307,6 @@ section {
 }
 .stat-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.4; }
 
-/* ── PUBLICATIONS ── */
 .pub-list { display: flex; flex-direction: column; gap: 16px; }
 .pub-card {
   background: var(--surface);
@@ -325,6 +318,10 @@ section {
   transition: transform 0.2s, box-shadow 0.2s;
 }
 .pub-card:hover { transform: translateX(4px); box-shadow: 0 4px 24px rgba(42,32,22,0.06); }
+.pub-card.cern-thesis {
+  border-color: #E8D4A4;
+  background: linear-gradient(135deg, #FFFDF5 0%, var(--surface) 100%);
+}
 .pub-num {
   font-family: 'Instrument Serif', serif;
   font-size: 1.4rem;
@@ -351,6 +348,15 @@ section {
 .q1 { background: var(--sage-light); color: #4A7A48; border: 1px solid var(--sage-mid); }
 .q2 { background: var(--sky-light); color: #3A6A9A; border: 1px solid var(--sky-mid); }
 .scopus { background: var(--lavender-light); color: #6050A0; border: 1px solid var(--lavender-mid); }
+.cern-badge {
+  font-size: 0.73rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 100px;
+  background: var(--gold-light);
+  color: #8A6020;
+  border: 1px solid #E8D4A4;
+}
 .pub-link {
   font-size: 0.78rem;
   color: var(--muted);
@@ -362,7 +368,6 @@ section {
 }
 .pub-link:hover { color: var(--text); border-color: var(--text); }
 
-/* ── EXPERIENCE ── */
 .timeline { position: relative; padding-left: 24px; }
 .timeline::before {
   content: '';
@@ -407,7 +412,6 @@ section {
   letter-spacing: 0.3px;
 }
 
-/* ── COURSES ── */
 .courses-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -435,7 +439,6 @@ section {
 .course-code { font-size: 0.77rem; color: var(--muted); font-family: monospace; }
 .course-level { font-size: 0.75rem; color: var(--muted); margin-top: 4px; }
 
-/* ── SKILLS ── */
 .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
 .skill-group {
   background: var(--surface);
@@ -456,7 +459,6 @@ section {
   color: var(--text);
 }
 
-/* ── CONNECT ── */
 .connect-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
 .connect-card {
   display: flex;
@@ -483,7 +485,6 @@ section {
 .connect-label { font-size: 0.88rem; font-weight: 700; color: var(--text); }
 .connect-sub { font-size: 0.75rem; color: var(--muted); }
 
-/* ── FOOTER ── */
 footer {
   position: relative;
   z-index: 1;
@@ -494,7 +495,6 @@ footer {
   font-size: 0.85rem;
 }
 
-/* ── RESPONSIVE ── */
 @media (max-width: 860px) {
   nav { padding: 16px 24px; }
   .nav-links { display: none; }
@@ -507,7 +507,6 @@ footer {
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">Hatice Tekiş</a>
   <ul class="nav-links">
@@ -519,7 +518,6 @@ footer {
   </ul>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
   <div class="hero-content">
     <div class="hero-eyebrow">Open to collaboration</div>
@@ -554,7 +552,7 @@ footer {
       <div class="card-pill">
         <div class="card-pill-dot" style="background:#E8A4B8;"></div>
         <span class="card-pill-label">Publications</span>
-        <span class="card-pill-val">4</span>
+        <span class="card-pill-val">5</span>
       </div>
       <div class="card-pill">
         <div class="card-pill-dot" style="background:#9DB89A;"></div>
@@ -582,20 +580,19 @@ footer {
 
 <div class="divider"></div>
 
-<!-- ABOUT -->
 <section id="about">
   <div class="section-label">About</div>
   <div class="section-title">Who I am</div>
   <div class="about-grid">
     <div class="about-text">
       <p>I'm a <strong>Lecturer and AI Engineer</strong> at Kapadokya University, teaching courses from AI Literacy to Deep Learning applications to over 900 students each semester. My research sits at the intersection of <strong>artificial intelligence and dentistry</strong> — using YOLO-based models to detect dental anatomy and identify implant brands from radiographic images.</p>
-      <p>Before joining academia, I spent over a year at <strong>CERN</strong> in Geneva as a Technical Student, developing embedded systems and data pipelines for the CMS Detector temperature monitoring project — selected from thousands of applicants.</p>
+      <p>Before joining academia, I spent over a year at <strong>CERN</strong> in Geneva as a Technical Student, developing embedded systems and data pipelines for the CMS Detector temperature monitoring project — selected from thousands of applicants. My M.Sc. thesis, conducted in collaboration with CERN, proposed a novel <strong>Massive Temperature Monitoring System (MTRS)</strong> for the CMS Detector and is archived in the official CERN repository.</p>
       <p>I hold a <strong>B.Sc. in Computer Engineering</strong> and a <strong>B.Sc. in Electrical & Electronics Engineering</strong> (double major, ranked 2nd in both), and an <strong>M.Sc. in Electrical & Computer Engineering</strong> (GPA: 3.96) — all fully funded. Currently pursuing a <strong>Ph.D. in Computer Engineering</strong> at Eskişehir Technical University.</p>
     </div>
     <div class="about-stats">
       <div class="stat-card">
-        <div class="stat-num" style="color:#C06080;">4</div>
-        <div class="stat-desc">SCI-E & Scopus publications</div>
+        <div class="stat-num" style="color:#C06080;">5</div>
+        <div class="stat-desc">SCI-E, Scopus & CERN publications</div>
       </div>
       <div class="stat-card">
         <div class="stat-num" style="color:#D4A060;">2×</div>
@@ -623,7 +620,6 @@ footer {
 
 <div class="divider"></div>
 
-<!-- PUBLICATIONS -->
 <section id="publications">
   <div class="section-label">Research</div>
   <div class="section-title">Publications</div>
@@ -681,12 +677,25 @@ footer {
       </div>
     </div>
 
+    <div class="pub-card cern-thesis">
+      <div class="pub-num">05</div>
+      <div style="flex:1">
+        <div class="pub-title">Innovative Standalone Massive Channel Temperature Monitoring System for CMS Detector</div>
+        <div class="pub-authors">Tekiş, H. — Supervisors: Tsirou, A. (CERN) & Yumusak, S. (2021)</div>
+        <div class="pub-meta">
+          <span class="pub-journal">M.Sc. Thesis · Karatay University</span>
+          <span class="cern-badge">⚛️ CERN Repository</span>
+          <span style="font-size:0.78rem; color:var(--muted);">CERN-THESIS-2021-135</span>
+          <a href="https://repository.cern/records/qmjep-vyj82" target="_blank" class="pub-link">CERN CDS ↗</a>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- EXPERIENCE -->
 <section id="experience">
   <div class="section-label">Career</div>
   <div class="section-title">Experience</div>
@@ -722,7 +731,7 @@ footer {
         <div><div class="tl-title">Technical Student — Electronics Engineer</div><div class="tl-company">European Organization for Nuclear Research</div></div>
         <div class="tl-date">Feb 2020 – Mar 2021</div>
       </div>
-      <div class="tl-desc">Developed embedded C software on Raspberry Pi for the CMS Detector temperature monitoring system. Redesigned PCB cards in Altium Designer. Implemented OPC UA server integration with Python client for seamless sensor data transmission to the Detector Control System.</div>
+      <div class="tl-desc">Developed embedded C software on Raspberry Pi for the CMS Detector temperature monitoring system. Redesigned PCB cards in Altium Designer. Implemented OPC UA server integration with Python client for seamless sensor data transmission to the Detector Control System. This work formed the basis of the M.Sc. thesis archived in the CERN repository.</div>
     </div>
 
     <div class="timeline-item highlight">
@@ -747,7 +756,6 @@ footer {
 
 <div class="divider"></div>
 
-<!-- COURSES -->
 <section id="courses">
   <div class="section-label">Teaching</div>
   <div class="section-title">Courses I teach</div>
@@ -785,7 +793,6 @@ footer {
 
 <div class="divider"></div>
 
-<!-- SKILLS -->
 <section id="skills">
   <div class="section-label">Technical</div>
   <div class="section-title">Skills & Tools</div>
@@ -819,7 +826,6 @@ footer {
 
 <div class="divider"></div>
 
-<!-- CONNECT -->
 <section id="connect">
   <div class="section-label">Contact</div>
   <div class="section-title">Let's connect</div>
@@ -827,6 +833,10 @@ footer {
     <a href="mailto:hhatice.tekis@gmail.com" class="connect-card">
       <div class="connect-icon-wrap" style="background:var(--rose-light);">📧</div>
       <div><div class="connect-label">Email</div><div class="connect-sub">hhatice.tekis@gmail.com</div></div>
+    </a>
+    <a href="https://scholar.google.com/citations?user=cVaLaU8AAAAJ&hl=tr" target="_blank" class="connect-card">
+      <div class="connect-icon-wrap" style="background:var(--sage-light);">🎓</div>
+      <div><div class="connect-label">Google Scholar</div><div class="connect-sub">Hatice Tekiş</div></div>
     </a>
     <a href="https://linkedin.com/in/haticetekis" target="_blank" class="connect-card">
       <div class="connect-icon-wrap" style="background:var(--sky-light);">💼</div>
