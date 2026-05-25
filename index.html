@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hatice Tekiş — AI Engineer & Lecturer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #050810;
+  --surface: #0d1117;
+  --surface2: #161b27;
+  --border: rgba(255,255,255,0.06);
+  --accent: #7DF9FF;
+  --accent2: #FF6B9D;
+  --accent3: #A78BFA;
+  --text: #E8EDF5;
+  --muted: #6B7280;
+  --cern: #0033A0;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── NOISE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* ── GRID LINES ── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(125,249,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(125,249,255,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── GLOW BLOBS ── */
+.blob {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.12;
+}
+.blob-1 { width: 500px; height: 500px; background: #7DF9FF; top: -100px; left: -100px; animation: drift 20s ease-in-out infinite; }
+.blob-2 { width: 400px; height: 400px; background: #FF6B9D; bottom: 20%; right: -80px; animation: drift 25s ease-in-out infinite reverse; }
+.blob-3 { width: 300px; height: 300px; background: #A78BFA; top: 50%; left: 30%; animation: drift 18s ease-in-out infinite 5s; }
+
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(30px, -20px); }
+  66% { transform: translate(-20px, 30px); }
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 48px;
+  background: rgba(5, 8, 16, 0.7);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: -0.5px;
+}
+
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--accent); }
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 48px 80px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.hero-content { max-width: 700px; }
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(125,249,255,0.08);
+  border: 1px solid rgba(125,249,255,0.2);
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-size: 0.8rem;
+  color: var(--accent);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 28px;
+  animation: fadeUp 0.6s ease both;
+}
+
+.hero-tag::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -2px;
+  margin-bottom: 24px;
+  animation: fadeUp 0.6s ease 0.1s both;
+}
+
+h1 .name { color: var(--text); display: block; }
+h1 .role {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent3) 50%, var(--accent2) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+}
+
+.hero-desc {
+  font-size: 1.1rem;
+  color: var(--muted);
+  max-width: 540px;
+  margin-bottom: 40px;
+  line-height: 1.8;
+  animation: fadeUp 0.6s ease 0.2s both;
+}
+
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 40px;
+  animation: fadeUp 0.6s ease 0.3s both;
+}
+
+.badge {
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+.badge-cyan { background: rgba(125,249,255,0.1); color: var(--accent); border: 1px solid rgba(125,249,255,0.2); }
+.badge-pink { background: rgba(255,107,157,0.1); color: var(--accent2); border: 1px solid rgba(255,107,157,0.2); }
+.badge-purple { background: rgba(167,139,250,0.1); color: var(--accent3); border: 1px solid rgba(167,139,250,0.2); }
+.badge-gold { background: rgba(251,191,36,0.1); color: #FBB024; border: 1px solid rgba(251,191,36,0.2); }
+
+.hero-ctas {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  animation: fadeUp 0.6s ease 0.4s both;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 28px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #050810;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(125,249,255,0.3); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── CERN BADGE ── */
+.cern-badge {
+  position: absolute;
+  right: 48px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  animation: fadeUp 0.6s ease 0.5s both;
+}
+
+.cern-ring {
+  width: 180px; height: 180px;
+  border-radius: 50%;
+  border: 1px solid rgba(125,249,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.cern-ring::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  border: 1px dashed rgba(125,249,255,0.1);
+  animation: spin 20s linear infinite;
+}
+
+.cern-ring::after {
+  content: '';
+  position: absolute;
+  inset: 20px;
+  border-radius: 50%;
+  border: 1px solid rgba(167,139,250,0.1);
+  animation: spin 15s linear infinite reverse;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.cern-inner {
+  text-align: center;
+  z-index: 1;
+}
+.cern-inner .emoji { font-size: 2.5rem; display: block; margin-bottom: 4px; }
+.cern-inner .label { font-family: 'Syne', sans-serif; font-size: 0.75rem; font-weight: 700; color: var(--accent); letter-spacing: 1px; text-transform: uppercase; }
+.cern-inner .sub { font-size: 0.7rem; color: var(--muted); }
+
+/* ── SECTIONS ── */
+section {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 48px;
+}
+
+.section-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: var(--text);
+  margin-bottom: 48px;
+  line-height: 1.1;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── ABOUT ── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.about-text p {
+  color: var(--muted);
+  margin-bottom: 18px;
+  font-size: 0.97rem;
+}
+
+.about-text p strong { color: var(--text); }
+
+.about-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.stat-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.stat-card:hover { border-color: rgba(125,249,255,0.3); transform: translateY(-3px); }
+.stat-card .num {
+  font-family: 'Syne', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-card .desc { font-size: 0.82rem; color: var(--muted); }
+
+/* ── PUBLICATIONS ── */
+.pub-list { display: flex; flex-direction: column; gap: 20px; }
+
+.pub-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px;
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.pub-card:hover { border-color: rgba(125,249,255,0.2); transform: translateX(4px); }
+
+.pub-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--muted);
+  min-width: 28px;
+  padding-top: 3px;
+}
+
+.pub-body { flex: 1; }
+.pub-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.97rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+.pub-authors { font-size: 0.85rem; color: var(--muted); margin-bottom: 10px; }
+.pub-meta { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+
+.pub-journal {
+  font-size: 0.82rem;
+  color: var(--accent);
+  font-style: italic;
+}
+
+.pub-q {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+.q1 { background: rgba(125,249,255,0.1); color: var(--accent); }
+.q2 { background: rgba(167,139,250,0.1); color: var(--accent3); }
+.scopus { background: rgba(255,107,157,0.1); color: var(--accent2); }
+
+.pub-link {
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  padding: 3px 10px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+.pub-link:hover { color: var(--accent); border-color: var(--accent); }
+
+/* ── EXPERIENCE ── */
+.timeline { position: relative; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 8px; bottom: 8px;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--accent), var(--accent3), transparent);
+}
+
+.timeline-item {
+  padding-left: 32px;
+  padding-bottom: 40px;
+  position: relative;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -4px; top: 8px;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 12px rgba(125,249,255,0.5);
+}
+
+.tl-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 6px; }
+
+.tl-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.tl-company {
+  font-size: 0.88rem;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.tl-date {
+  font-size: 0.8rem;
+  color: var(--muted);
+  white-space: nowrap;
+  font-family: monospace;
+}
+.tl-desc {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* ── COURSES ── */
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.course-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.course-card:hover { border-color: rgba(167,139,250,0.3); transform: translateY(-3px); }
+
+.course-icon { font-size: 1.5rem; flex-shrink: 0; }
+.course-info { flex: 1; }
+.course-name { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.course-code { font-size: 0.78rem; color: var(--accent3); font-family: monospace; }
+.course-level {
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ── SKILLS ── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.skill-group {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+}
+.skill-group-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+.skill-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+.skill-tag {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  color: var(--text);
+  font-family: monospace;
+}
+
+/* ── CONNECT ── */
+.connect-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+}
+
+.connect-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px 20px;
+  text-decoration: none;
+  color: var(--text);
+  transition: all 0.2s;
+}
+.connect-card:hover { border-color: rgba(125,249,255,0.3); transform: translateY(-3px); color: var(--accent); }
+.connect-icon { font-size: 1.4rem; }
+.connect-label { font-family: 'Syne', sans-serif; font-size: 0.88rem; font-weight: 700; }
+.connect-sub { font-size: 0.78rem; color: var(--muted); }
+
+/* ── FOOTER ── */
+footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 40px 48px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+footer strong { color: var(--accent); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 16px 24px; }
+  .nav-links { display: none; }
+  .hero { padding: 100px 24px 60px; flex-direction: column; }
+  .cern-badge { position: static; transform: none; margin-top: 40px; align-self: flex-start; }
+  section { padding: 60px 24px; }
+  .about-grid { grid-template-columns: 1fr; }
+  .hero-content { max-width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+<div class="blob blob-3"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">HT</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#courses">Teaching</a></li>
+    <li><a href="#connect">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">Available for collaboration</div>
+    <h1>
+      <span class="name">Hatice Tekiş</span>
+      <span class="role">AI Engineer<br>& Lecturer</span>
+    </h1>
+    <p class="hero-desc">
+      Researcher at Kapadokya University specialising in <strong>AI in Dentistry</strong>,
+      Computer Vision, NLP, and Deep Learning.
+      Former <strong>CERN Technical Student</strong>.
+    </p>
+    <div class="hero-badges">
+      <span class="badge badge-cyan">🦷 AI in Dentistry</span>
+      <span class="badge badge-pink">👁 Computer Vision</span>
+      <span class="badge badge-purple">🧠 Deep Learning</span>
+      <span class="badge badge-purple">💬 NLP</span>
+      <span class="badge badge-gold">⚛️ Ex-CERN</span>
+    </div>
+    <div class="hero-ctas">
+      <a href="mailto:hhatice.tekis@gmail.com" class="btn btn-primary">✉ Get in Touch</a>
+      <a href="https://linkedin.com/in/haticetekis" target="_blank" class="btn btn-outline">LinkedIn →</a>
+      <a href="https://github.com/haticetheengineer" target="_blank" class="btn btn-outline">GitHub →</a>
+    </div>
+  </div>
+
+  <div class="cern-badge">
+    <div class="cern-ring">
+      <div class="cern-inner">
+        <span class="emoji">⚛️</span>
+        <span class="label">CERN</span>
+        <span class="sub">Geneva, CH</span>
+        <span class="sub">2019 · 2020–21</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About</div>
+  <div class="section-title">Who I am</div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a <strong>Lecturer and AI Engineer</strong> at Kapadokya University, where I teach courses ranging from AI Literacy to Deep Learning applications. My research sits at the intersection of <strong>artificial intelligence and dentistry</strong> — using YOLO-based computer vision models to detect dental anatomy and identify implant brands from radiographic images.</p>
+      <p>Before joining academia, I spent over a year at <strong>CERN</strong> in Geneva as a Technical Student, developing embedded systems and data pipelines for the CMS Detector temperature monitoring project.</p>
+      <p>I hold a <strong>B.Sc. in Computer Engineering</strong>, a <strong>B.Sc. in Electrical & Electronics Engineering</strong> (double major, both ranked 2nd in class), and an <strong>M.Sc. in Electrical & Computer Engineering</strong> — all fully funded. I am currently pursuing a <strong>Ph.D. in Computer Engineering</strong> at Eskişehir Technical University.</p>
+      <p>I'm passionate about bridging cutting-edge AI research with real clinical impact, and building tools that make AI more accessible for educators and practitioners alike.</p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-card">
+        <div class="num">4</div>
+        <div class="desc">SCI-E / Scopus publications</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">2×</div>
+        <div class="desc">CERN researcher (2019 & 2020–21)</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">900+</div>
+        <div class="desc">students taught per semester</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">3.96</div>
+        <div class="desc">M.Sc. GPA out of 4.00</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">Ph.D.</div>
+        <div class="desc">in progress — ESTU, 2025–</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">YÖKDİL</div>
+        <div class="desc">English score: 80</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="section-label">Research</div>
+  <div class="section-title">Publications</div>
+  <div class="pub-list">
+
+    <div class="pub-card">
+      <div class="pub-num">01</div>
+      <div class="pub-body">
+        <div class="pub-title">Comparative Analysis of YOLO Variants for Dental Implant Brand Identification</div>
+        <div class="pub-authors">Tekiş, H., Zirek, T., & Taşsöker, M. (2025)</div>
+        <div class="pub-meta">
+          <span class="pub-journal">Scientific Reports, 15, 33304</span>
+          <span class="pub-q q1">SCI-E Q1</span>
+          <a href="https://doi.org/10.1038/s41598-025-15383-0" target="_blank" class="pub-link">DOI ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pub-card">
+      <div class="pub-num">02</div>
+      <div class="pub-body">
+        <div class="pub-title">AI-Powered Detection of Dental Anatomy: A YOLO-Based Approach</div>
+        <div class="pub-authors">Tekiş, H., Zirek, T., & Taşsöker, M. (2026)</div>
+        <div class="pub-meta">
+          <span class="pub-journal">Oral Surgery, Oral Medicine, Oral Pathology and Oral Radiology</span>
+          <span class="pub-q q2">SCI-E Q2</span>
+          <a href="https://doi.org/10.1016/j.oooo.2025.12.011" target="_blank" class="pub-link">DOI ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pub-card">
+      <div class="pub-num">03</div>
+      <div class="pub-body">
+        <div class="pub-title">Oral Health Profile In A Turkish Subpopulation Aged 18+</div>
+        <div class="pub-authors">Tassoker, M., Zirek, T., Tekiş, H., & Karakuş, R. (2025)</div>
+        <div class="pub-meta">
+          <span class="pub-journal">International Dental Journal, 75, 104464</span>
+          <span class="pub-q q1">SCI-E</span>
+          <a href="https://doi.org/10.1016/j.identj.2025.104464" target="_blank" class="pub-link">DOI ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pub-card">
+      <div class="pub-num">04</div>
+      <div class="pub-body">
+        <div class="pub-title">Evaluation of the Performance of AI-Powered Bots in the Turkish Dentistry Specialty Examination</div>
+        <div class="pub-authors">Işık, B.K., Tekiş, H., & Doğan, F. (2025)</div>
+        <div class="pub-meta">
+          <span class="pub-journal">Current Research in Dental Sciences</span>
+          <span class="pub-q scopus">Scopus / TR Index</span>
+          <span style="font-size:0.8rem; color: var(--muted); font-style:italic;">In Press</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Career</div>
+  <div class="section-title">Experience</div>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="tl-header">
+        <div>
+          <div class="tl-title">Lecturer (Öğretim Görevlisi)</div>
+          <div class="tl-company">Kapadokya University</div>
+        </div>
+        <div class="tl-date">Jun 2025 – present</div>
+      </div>
+      <div class="tl-desc">Teaching AI, data science and software development courses to 900+ students. Conducting research on AI applications in dental diagnostics.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-header">
+        <div>
+          <div class="tl-title">AI Engineer</div>
+          <div class="tl-company">Konya Metropolitan Municipality</div>
+        </div>
+        <div class="tl-date">Dec 2023 – Mar 2024</div>
+      </div>
+      <div class="tl-desc">Developed an NLP & ML automation system to classify and route e-petitions, significantly improving processing efficiency.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-header">
+        <div>
+          <div class="tl-title">Digital Design Engineer</div>
+          <div class="tl-company">Meteksan Defence</div>
+        </div>
+        <div class="tl-date">May 2023 – Jul 2023</div>
+      </div>
+      <div class="tl-desc">Defence electronics digital design engineering.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-header">
+        <div>
+          <div class="tl-title">⚛️ Technical Student — Electronics Engineer</div>
+          <div class="tl-company">CERN · Geneva, Switzerland</div>
+        </div>
+        <div class="tl-date">Feb 2020 – Mar 2021</div>
+      </div>
+      <div class="tl-desc">Developed embedded C software on Raspberry Pi for the CMS Detector temperature monitoring system. Redesigned PCB cards in Altium Designer. Implemented OPC UA server integration with Python client for seamless sensor data transmission.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-header">
+        <div>
+          <div class="tl-title">⚛️ Summer Student — Electronics Engineer</div>
+          <div class="tl-company">CERN · Geneva, Switzerland</div>
+        </div>
+        <div class="tl-date">Jun 2019 – Sep 2019</div>
+      </div>
+      <div class="tl-desc">Selected from ~2,500 applicants. Developed embedded C program for LTC2984 chip, Python GUI for real-time sensor monitoring, and designed new PCB read-out cards.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-header">
+        <div>
+          <div class="tl-title">Research & Teaching Assistant</div>
+          <div class="tl-company">KTO Karatay University</div>
+        </div>
+        <div class="tl-date">Oct 2017 – Jul 2021</div>
+      </div>
+      <div class="tl-desc">Conducted deep learning research (U-Net, V-Net, PS-Net) on prostate cancer detection. Supervised lab sessions and prepared coursework for EE undergraduate courses.</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COURSES -->
+<section id="courses">
+  <div class="section-label">Teaching</div>
+  <div class="section-title">Courses I Teach</div>
+  <div class="courses-grid">
+    <div class="course-card">
+      <div class="course-icon">🤖</div>
+      <div class="course-info">
+        <div class="course-name">AI Literacy</div>
+        <div class="course-code">HAY412</div>
+        <div class="course-level">Undergraduate · 44 students</div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-icon">🧠</div>
+      <div class="course-info">
+        <div class="course-name">Fundamentals of Artificial Intelligence</div>
+        <div class="course-code">TYZ171</div>
+        <div class="course-level">Undergraduate · 201 students</div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-icon">💻</div>
+      <div class="course-info">
+        <div class="course-name">Fundamentals of Information Technologies</div>
+        <div class="course-code">TEB161</div>
+        <div class="course-level">Undergraduate · 314 students</div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-icon">🛠️</div>
+      <div class="course-info">
+        <div class="course-name">AI Applications</div>
+        <div class="course-code">BPO228 / BPU278</div>
+        <div class="course-level">Associate Degree · 195 students</div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-icon">📊</div>
+      <div class="course-info">
+        <div class="course-name">Data Analysis</div>
+        <div class="course-code">BPO225</div>
+        <div class="course-level">Associate Degree · 22 students</div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-icon">🔒</div>
+      <div class="course-info">
+        <div class="course-name">Introduction to Information Security</div>
+        <div class="course-code">BPO237 / BPU291</div>
+        <div class="course-level">Associate Degree · 133 students</div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-icon">🌐</div>
+      <div class="course-info">
+        <div class="course-name">Back-end Development with Node.js</div>
+        <div class="course-code">BPO213 / BPU283</div>
+        <div class="course-level">Associate Degree · 134 students</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Technical</div>
+  <div class="section-title">Skills & Tools</div>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-group-title">Languages</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">C/C++</span>
+        <span class="skill-tag">C#</span>
+        <span class="skill-tag">Java</span>
+        <span class="skill-tag">MATLAB</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">Bash</span>
+        <span class="skill-tag">TypeScript</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">AI / ML</div>
+      <div class="skill-tags">
+        <span class="skill-tag">YOLOv8–11</span>
+        <span class="skill-tag">TensorFlow</span>
+        <span class="skill-tag">Keras</span>
+        <span class="skill-tag">Scikit-learn</span>
+        <span class="skill-tag">XGBoost</span>
+        <span class="skill-tag">LightGBM</span>
+        <span class="skill-tag">OpenCV</span>
+        <span class="skill-tag">HuggingFace</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Data Science</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Pandas</span>
+        <span class="skill-tag">NumPy</span>
+        <span class="skill-tag">Matplotlib</span>
+        <span class="skill-tag">Seaborn</span>
+        <span class="skill-tag">D3.js</span>
+        <span class="skill-tag">Streamlit</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Dev & Tools</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">Docker</span>
+        <span class="skill-tag">Linux</span>
+        <span class="skill-tag">Node.js</span>
+        <span class="skill-tag">React</span>
+        <span class="skill-tag">Altium</span>
+        <span class="skill-tag">OPC UA</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONNECT -->
+<section id="connect">
+  <div class="section-label">Contact</div>
+  <div class="section-title">Let's connect</div>
+  <div class="connect-grid">
+    <a href="mailto:hhatice.tekis@gmail.com" class="connect-card">
+      <span class="connect-icon">✉️</span>
+      <div>
+        <div class="connect-label">Email</div>
+        <div class="connect-sub">hhatice.tekis@gmail.com</div>
+      </div>
+    </a>
+    <a href="https://linkedin.com/in/haticetekis" target="_blank" class="connect-card">
+      <span class="connect-icon">💼</span>
+      <div>
+        <div class="connect-label">LinkedIn</div>
+        <div class="connect-sub">haticetekis</div>
+      </div>
+    </a>
+    <a href="https://github.com/haticetheengineer" target="_blank" class="connect-card">
+      <span class="connect-icon">🐙</span>
+      <div>
+        <div class="connect-label">GitHub</div>
+        <div class="connect-sub">haticetheengineer</div>
+      </div>
+    </a>
+    <a href="https://twitter.com/itsjusthtc" target="_blank" class="connect-card">
+      <span class="connect-icon">𝕏</span>
+      <div>
+        <div class="connect-label">Twitter / X</div>
+        <div class="connect-sub">@itsjusthtc</div>
+      </div>
+    </a>
+    <a href="https://dev.to/haticetheengineer" target="_blank" class="connect-card">
+      <span class="connect-icon">📝</span>
+      <div>
+        <div class="connect-label">DEV.to</div>
+        <div class="connect-sub">haticetheengineer</div>
+      </div>
+    </a>
+    <a href="https://www.buymeacoffee.com/haticeiscoding" target="_blank" class="connect-card">
+      <span class="connect-icon">☕</span>
+      <div>
+        <div class="connect-label">Buy Me a Coffee</div>
+        <div class="connect-sub">haticeiscoding</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <strong>Hatice Tekiş</strong> · Lecturer & AI Engineer · Kapadokya University<br>
+  <span style="font-size:0.78rem; margin-top:6px; display:block;">Built with ❤️ and deployed on GitHub Pages</span>
+</footer>
+
+</body>
+</html>
